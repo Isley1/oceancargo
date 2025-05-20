@@ -6,6 +6,8 @@
     <title>OceanCargo | Container Shipping Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./script.js">
     <script>
         tailwind.config = {
             theme: {
@@ -19,32 +21,6 @@
             }
         }
     </script>
-    <style>
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1551524559-8af4e6624178?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .container-bg {
-            background-image: url('https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .tracking-input:focus + .tracking-label,
-        .tracking-input:not(:placeholder-shown) + .tracking-label {
-            transform: translateY(-1.5rem) scale(0.8);
-            background-color: white;
-            padding: 0 0.5rem;
-        }
-        
-        .quote-form input:focus,
-        .quote-form select:focus,
-        .quote-form textarea:focus {
-            outline: 2px solid #4299e1;
-        }
-    </style>
 </head>
 <body class="font-sans bg-gray-50">
     <!-- Header/Navigation -->
@@ -821,62 +797,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Form submission handling
-        const quoteForm = document.querySelector('.quote-form');
-        if (quoteForm) {
-            quoteForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your quote request! Our team will contact you within 24 hours.');
-                quoteForm.reset();
-            });
-        }
-        
-        // Tracking form submission
-        const trackingForm = document.querySelector('#tracking');
-        if (trackingForm) {
-            trackingForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const trackingNumber = document.getElementById('tracking-number').value;
-                if (trackingNumber) {
-                    alert(`Tracking information for ${trackingNumber} would be displayed here.`);
-                } else {
-                    alert('Please enter a valid tracking number.');
-                }
-            });
-        }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>
