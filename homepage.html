@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OceanCargo | Container Shipping Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a365d',
+                        secondary: '#2c5282',
+                        accent: '#4299e1',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1551524559-8af4e6624178?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .container-bg {
+            background-image: url('https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .tracking-input:focus + .tracking-label,
+        .tracking-input:not(:placeholder-shown) + .tracking-label {
+            transform: translateY(-1.5rem) scale(0.8);
+            background-color: white;
+            padding: 0 0.5rem;
+        }
+        
+        .quote-form input:focus,
+        .quote-form select:focus,
+        .quote-form textarea:focus {
+            outline: 2px solid #4299e1;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bg-primary text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-ship text-2xl text-accent"></i>
+                <span class="text-2xl font-bold">Ocean<span class="text-accent">Cargo</span></span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-accent transition">Home</a>
+                <a href="#services" class="hover:text-accent transition">Services</a>
+                <a href="#containers" class="hover:text-accent transition">Containers</a>
+                <a href="#tracking" class="hover:text-accent transition">Tracking</a>
+                <a href="#about" class="hover:text-accent transition">About</a>
+                <a href="#contact" class="hover:text-accent transition">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-xl" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="hidden md:block bg-accent hover:bg-blue-600 px-4 py-2 rounded transition">
+                    Get a Quote
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-secondary" id="mobile-menu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#home" class="hover:text-accent transition py-2">Home</a>
+                <a href="#services" class="hover:text-accent transition py-2">Services</a>
+                <a href="#containers" class="hover:text-accent transition py-2">Containers</a>
+                <a href="#tracking" class="hover:text-accent transition py-2">Tracking</a>
+                <a href="#about" class="hover:text-accent transition py-2">About</a>
+                <a href="#contact" class="hover:text-accent transition py-2">Contact</a>
+                <button class="bg-accent hover:bg-blue-600 px-4 py-2 rounded transition w-full">
+                    Get a Quote
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white min-h-screen flex items-center">
+        <div class="container mx-auto px-4 py-20">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Global Container Shipping Solutions</h1>
+                <p class="text-xl mb-8">Reliable, efficient, and cost-effective container shipping services across the globe. We connect markets and move your cargo with precision.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button class="bg-accent hover:bg-blue-600 px-6 py-3 rounded-lg font-semibold transition flex-1">
+                        Get Instant Quote
+                    </button>
+                    <button class="bg-white text-primary hover:bg-gray-200 px-6 py-3 rounded-lg font-semibold transition flex-1">
+                        Track Shipment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-12 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-primary mb-2">25+</div>
+                    <div class="text-gray-600">Years Experience</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-primary mb-2">150+</div>
+                    <div class="text-gray-600">Countries Served</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-primary mb-2">10M+</div>
+                    <div class="text-gray-600">Containers Shipped</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold text-primary mb-2">99.7%</div>
+                    <div class="text-gray-600">On-Time Delivery</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Our Shipping Services</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Comprehensive logistics solutions tailored to your business needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Ocean Freight</h3>
+                    <p class="text-gray-600 mb-4">Full container load (FCL) and less than container load (LCL) services with competitive rates and reliable schedules.</p>
+                    <a href="#" class="text-accent font-semibold hover:underline">Learn more →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Land Transport</h3>
+                    <p class="text-gray-600 mb-4">Door-to-door service with our extensive network of trucking partners for seamless inland transportation.</p>
+                    <a href="#" class="text-accent font-semibold hover:underline">Learn more →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Warehousing</h3>
+                    <p class="text-gray-600 mb-4">Secure storage solutions with inventory management to streamline your supply chain operations.</p>
+                    <a href="#" class="text-accent font-semibold hover:underline">Learn more →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Customs Clearance</h3>
+                    <p class="text-gray-600 mb-4">Expert assistance with documentation and customs procedures to ensure smooth border crossings.</p>
+                    <a href="#" class="text-accent font-semibold hover:underline">Learn more →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-temperature-low"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Reefer Services</h3>
+                    <p class="text-gray-600 mb-4">Temperature-controlled shipping for perishable goods with real-time monitoring capabilities.</p>
+                    <a href="#" class="text-accent font-semibold hover:underline">Learn more →</a>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Project Cargo</h3>
+                    <p class="text-gray-600 mb-4">Specialized handling for oversized, heavy, or complex shipments requiring unique solutions.</p>
+                    <a href="#" class="text-accent font-semibold hover:underline">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Container Types Section -->
+    <section id="containers" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Our Container Options</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Choose from our wide range of container types to match your cargo requirements</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Container 1 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                    <div class="container-bg h-48"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Standard Dry Container</h3>
+                        <div class="flex justify-between mb-3">
+                            <span class="text-gray-600">20' / 40' / 40' HC</span>
+                            <span class="font-bold text-primary">From $1,200</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">General purpose containers for dry cargo, available in various sizes to suit your needs.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Container 2 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                    <div class="container-bg h-48"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">High Cube Container</h3>
+                        <div class="flex justify-between mb-3">
+                            <span class="text-gray-600">40' / 45'</span>
+                            <span class="font-bold text-primary">From $1,500</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Extra height (9'6") for voluminous cargo, providing approximately 12% more capacity.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Container 3 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                    <div class="container-bg h-48"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Reefer Container</h3>
+                        <div class="flex justify-between mb-3">
+                            <span class="text-gray-600">20' / 40'</span>
+                            <span class="font-bold text-primary">From $2,800</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Temperature-controlled units for perishable goods with precise temperature ranges.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Container 4 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                    <div class="container-bg h-48"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Open Top Container</h3>
+                        <div class="flex justify-between mb-3">
+                            <span class="text-gray-600">20' / 40'</span>
+                            <span class="font-bold text-primary">From $1,750</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Convertible roof for top loading of oversized or awkwardly shaped cargo.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Container 5 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                    <div class="container-bg h-48"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Flat Rack Container</h3>
+                        <div class="flex justify-between mb-3">
+                            <span class="text-gray-600">20' / 40'</span>
+                            <span class="font-bold text-primary">From $2,100</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Collapsible sides for heavy or oversized machinery and construction materials.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Container 6 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                    <div class="container-bg h-48"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Tank Container</h3>
+                        <div class="flex justify-between mb-3">
+                            <span class="text-gray-600">20'</span>
+                            <span class="font-bold text-primary">From $3,200</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Specialized tanks for liquid cargo with various lining materials available.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-primary hover:bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold transition">
+                    View All Container Types
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section id="tracking" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-primary text-white p-8 md:p-12">
+                        <h2 class="text-3xl font-bold mb-6">Track Your Shipment</h2>
+                        <p class="mb-6">Enter your container number, booking reference, or BL/AWB number to get real-time updates on your shipment's status.</p>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-headset text-2xl"></i>
+                            <div>
+                                <p class="font-semibold">Need help?</p>
+                                <p class="text-accent">+1 (800) 555-OCEAN</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <div class="relative mb-8">
+                            <input type="text" id="tracking-number" class="tracking-input w-full px-4 py-3 border rounded-lg focus:border-accent" placeholder=" ">
+                            <label for="tracking-number" class="tracking-label absolute left-4 top-3 text-gray-500 transition-all duration-200">Enter tracking number</label>
+                        </div>
+                        
+                        <button class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition mb-6">
+                            Track Shipment
+                        </button>
+                        
+                        <div class="text-center">
+                            <p class="text-gray-600">Don't have your tracking number?</p>
+                            <a href="#" class="text-accent font-semibold hover:underline">Contact our customer service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">What Our Clients Say</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Trusted by thousands of businesses worldwide</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"OceanCargo has been our logistics partner for over 5 years. Their reliability and competitive rates have helped us expand our business to three new continents."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-semibold">Sarah Johnson</p>
+                            <p class="text-gray-500 text-sm">CEO, Global Imports Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"The real-time tracking system gives us peace of mind knowing exactly where our high-value shipments are at all times. Excellent customer service too."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-semibold">Michael Chen</p>
+                            <p class="text-gray-500 text-sm">Logistics Manager, TechSolutions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"We switched to OceanCargo last year and reduced our shipping costs by 18% while improving delivery times. Their expertise in customs clearance is unmatched."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-semibold">Elena Rodriguez</p>
+                            <p class="text-gray-500 text-sm">Director, Fashion Forward Ltd.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Form Section -->
+    <section class="py-20 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Get a Free Shipping Quote</h2>
+                    <p class="max-w-2xl mx-auto">Complete the form below and one of our shipping experts will provide you with a customized quote within 24 hours.</p>
+                </div>
+                
+                <form class="quote-form grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block mb-2 font-medium">Full Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 rounded-lg text-gray-800" required>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block mb-2 font-medium">Email Address</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 rounded-lg text-gray-800" required>
+                    </div>
+                    
+                    <div>
+                        <label for="company" class="block mb-2 font-medium">Company Name</label>
+                        <input type="text" id="company" class="w-full px-4 py-3 rounded-lg text-gray-800">
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block mb-2 font-medium">Phone Number</label>
+                        <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg text-gray-800" required>
+                    </div>
+                    
+                    <div>
+                        <label for="origin" class="block mb-2 font-medium">Origin Port</label>
+                        <select id="origin" class="w-full px-4 py-3 rounded-lg text-gray-800" required>
+                            <option value="">Select origin port</option>
+                            <option value="USLAX">Los Angeles, USA</option>
+                            <option value="CNNVY">Vancouver, Canada</option>
+                            <option value="CNSHA">Shanghai, China</option>
+                            <option value="DEHAM">Hamburg, Germany</option>
+                            <option value="JPTYO">Tokyo, Japan</option>
+                            <option value="SGSIN">Singapore</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="destination" class="block mb-2 font-medium">Destination Port</label>
+                        <select id="destination" class="w-full px-4 py-3 rounded-lg text-gray-800" required>
+                            <option value="">Select destination port</option>
+                            <option value="USLAX">Los Angeles, USA</option>
+                            <option value="CNNVY">Vancouver, Canada</option>
+                            <option value="CNSHA">Shanghai, China</option>
+                            <option value="DEHAM">Hamburg, Germany</option>
+                            <option value="JPTYO">Tokyo, Japan</option>
+                            <option value="SGSIN">Singapore</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="container-type" class="block mb-2 font-medium">Container Type</label>
+                        <select id="container-type" class="w-full px-4 py-3 rounded-lg text-gray-800" required>
+                            <option value="">Select container type</option>
+                            <option value="20DRY">20' Standard Dry</option>
+                            <option value="40DRY">40' Standard Dry</option>
+                            <option value="40HC">40' High Cube</option>
+                            <option value="20RF">20' Reefer</option>
+                            <option value="40RF">40' Reefer</option>
+                            <option value="20OT">20' Open Top</option>
+                            <option value="40OT">40' Open Top</option>
+                            <option value="20FR">20' Flat Rack</option>
+                            <option value="40FR">40' Flat Rack</option>
+                            <option value="20TK">20' Tank</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="cargo-type" class="block mb-2 font-medium">Cargo Type</label>
+                        <select id="cargo-type" class="w-full px-4 py-3 rounded-lg text-gray-800" required>
+                            <option value="">Select cargo type</option>
+                            <option value="general">General Cargo</option>
+                            <option value="perishable">Perishable Goods</option>
+                            <option value="hazardous">Hazardous Materials</option>
+                            <option value="machinery">Machinery/Equipment</option>
+                            <option value="vehicles">Vehicles</option>
+                            <option value="bulk">Bulk Commodities</option>
+                        </select>
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label for="message" class="block mb-2 font-medium">Additional Information</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg text-gray-800"></textarea>
+                    </div>
+                    
+                    <div class="md:col-span-2 flex items-center">
+                        <input type="checkbox" id="terms" class="mr-2" required>
+                        <label for="terms">I agree to the <a href="#" class="text-accent hover:underline">Terms & Conditions</a> and <a href="#" class="text-accent hover:underline">Privacy Policy</a></label>
+                    </div>
+                    
+                    <div class="md:col-span-2 text-center">
+                        <button type="submit" class="bg-accent hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition">
+                            Request Quote
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">About OceanCargo</h2>
+                    <p class="text-gray-600 mb-4">Founded in 1998, OceanCargo has grown from a regional shipping provider to a global leader in container logistics, serving clients in over 150 countries.</p>
+                    <p class="text-gray-600 mb-6">Our mission is to simplify global trade through innovative technology, exceptional service, and sustainable shipping practices that reduce environmental impact.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-check-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">ISO 9001 Certified</h4>
+                                <p class="text-gray-600">Our quality management system meets international standards.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-check-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Environmental Commitment</h4>
+                                <p class="text-gray-600">We offset 100% of our carbon emissions through verified programs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-check-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">24/7 Support</h4>
+                                <p class="text-gray-600">Our customer service team is available around the clock.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 relative">
+                    <div class="bg-gray-200 h-80 md:h-96 rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Port operations" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-accent text-white p-6 rounded-lg shadow-lg w-3/4">
+                        <h3 class="font-bold text-xl mb-2">Global Network</h3>
+                        <p class="text-sm">Strategic partnerships with major port operators and shipping lines worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Contact Us</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Get in touch with our team for any inquiries or support needs.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Our Offices</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Headquarters</h4>
+                                <p class="text-gray-600">123 Maritime Blvd, Suite 500<br>Long Beach, CA 90802<br>United States</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Asia Pacific</h4>
+                                <p class="text-gray-600">88 Harbour Road, Central<br>Hong Kong</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="text-accent mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Europe</h4>
+                                <p class="text-gray-600">Rotterdam House, 1 Harbour Square<br>Rotterdam, Netherlands 3011</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="text-accent mr-4">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">+1 (800) 555-OCEAN</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="text-accent mr-4">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">info@oceancargo.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="text-accent mr-4">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600">24/7 Customer Support</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Send Us a Message</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label for="contact-name" class="block mb-2 font-medium">Name</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-3 rounded-lg border" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-email" class="block mb-2 font-medium">Email</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-3 rounded-lg border" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-subject" class="block mb-2 font-medium">Subject</label>
+                            <input type="text" id="contact-subject" class="w-full px-4 py-3 rounded-lg border" required>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-message" class="block mb-2 font-medium">Message</label>
+                            <textarea id="contact-message" rows="5" class="w-full px-4 py-3 rounded-lg border" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-accent hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+                <p class="mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest shipping rates, industry news, and special offers.</p>
+                
+                <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg text-gray-800" required>
+                    <button type="submit" class="bg-accent hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition whitespace-nowrap">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-ship text-2xl text-accent"></i>
+                        <span class="text-2xl font-bold">Ocean<span class="text-accent">Cargo</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Global container shipping solutions for businesses of all sizes.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#containers" class="text-gray-400 hover:text-white transition">Containers</a></li>
+                        <li><a href="#tracking" class="text-gray-400 hover:text-white transition">Tracking</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Ocean Freight</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Land Transport</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Warehousing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Customs Clearance</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Reefer Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Project Cargo</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping Regulations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 OceanCargo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Form submission handling
+        const quoteForm = document.querySelector('.quote-form');
+        if (quoteForm) {
+            quoteForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your quote request! Our team will contact you within 24 hours.');
+                quoteForm.reset();
+            });
+        }
+        
+        // Tracking form submission
+        const trackingForm = document.querySelector('#tracking');
+        if (trackingForm) {
+            trackingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const trackingNumber = document.getElementById('tracking-number').value;
+                if (trackingNumber) {
+                    alert(`Tracking information for ${trackingNumber} would be displayed here.`);
+                } else {
+                    alert('Please enter a valid tracking number.');
+                }
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
