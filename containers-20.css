@@ -1,0 +1,210 @@
+/* 20-foot Container Types Page Styles */
+:root {
+    --primary-20: #2c5282;
+    --secondary-20: #2b6cb0;
+    --accent-20: #4299e1;
+    --highlight: #ebf8ff;
+}
+
+.container-types {
+    padding: 6rem 0;
+    background-color: var(--highlight);
+}
+
+.container-types .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.container-types h1 {
+    font-size: 2.5rem;
+    color: var(--primary-20);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.container-types h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-20);
+    border-radius: 2px;
+}
+
+.container-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.container-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.container-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cont-img {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.cont-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to top, rgba(255,255,255,0.2), transparent);
+}
+
+.cont-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.container-card:hover .cont-img img {
+    transform: scale(1.05);
+}
+
+.container-content {
+    padding: 1.8rem;
+}
+
+.container-content h3 {
+    font-size: 1.5rem;
+    color: var(--primary-20);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.container-content p {
+    color: var(--gray-600);
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+}
+
+.container-content ul {
+    list-style-type: none;
+    margin-bottom: 1.8rem;
+    padding-left: 0.5rem;
+}
+
+.container-content ul li {
+    color: var(--gray-700);
+    margin-bottom: 0.8rem;
+    padding-left: 1.8rem;
+    position: relative;
+}
+
+.container-content ul li::before {
+    content: "✓";
+    color: var(--accent-20);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.quote-link {
+    display: inline-block;
+    background-color: var(--accent-20);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.quote-link:hover {
+    background-color: var(--secondary-20);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container-types {
+        padding: 4rem 0;
+    }
+
+    .container-types h1 {
+        font-size: 2rem;
+    }
+
+    .container-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .cont-img {
+        height: 200px;
+    }
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* Stagger the animation for each card */
+.container-card:nth-child(1) { animation-delay: 0.1s; }
+.container-card:nth-child(2) { animation-delay: 0.2s; }
+.container-card:nth-child(3) { animation-delay: 0.3s; }
+.container-card:nth-child(4) { animation-delay: 0.4s; }
+.container-card:nth-child(5) { animation-delay: 0.5s; }
+.container-card:nth-child(6) { animation-delay: 0.6s; }
+.container-card:nth-child(7) { animation-delay: 0.7s; }
+.container-card:nth-child(8) { animation-delay: 0.8s; }
+
+/* Enhanced hover effects */
+.container-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.container-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.container-card:hover::before {
+    transform: translateX(100%);
+} 

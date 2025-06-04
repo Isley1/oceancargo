@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | AVTRCONT</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>AC</text></svg>" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./admin.css">
+    <style>
+        .admin-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .quote-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .quote-table th,
+        .quote-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .quote-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .quote-table tr:hover {
+            background-color: var(--gray-50);
+        }
+
+        .status-new {
+            background-color: #93c5fd;
+            color: #1e40af;
+        }
+
+        .status-pill {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-button {
+            padding: 0.25rem 0.5rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .view-button {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .delete-button {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-500);
+        }
+
+        .detail-row {
+            margin-bottom: 1rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .no-requests {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-500);
+        }
+
+        /* Add error state styles */
+        .error-message {
+            color: #ef4444;
+            padding: 1rem;
+            margin: 1rem 0;
+            background-color: #fee2e2;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo-text">AVTR<span class="accent">CONT</span></a>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="#dashboard">Dashboard</a>
+                <a href="#newsletter">Newsletter</a>
+                <a href="#quotes">Quotes</a>
+                <a href="#reviews">Reviews</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Overview -->
+    <section id="dashboard" class="dashboard-section">
+        <div class="container">
+            <div class="section-header">
+                <h1>Admin Dashboard</h1>
+                <p>Manage your website content and view analytics</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Newsletter Subscribers</h3>
+                        <p id="subscriber-count">0</p>
+                    </div>
+                </div>
+                <!-- Add more stat cards as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter-admin-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Newsletter Subscribers</h2>
+                <p>View and manage your newsletter subscribers</p>
+            </div>
+
+            <div class="subscribers-container">
+                <div class="subscribers-header">
+                    <div class="search-box">
+                        <input type="text" id="subscriber-search" placeholder="Search subscribers...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button id="export-subscribers" class="export-btn">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+
+                <div class="subscribers-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Date Subscribed</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subscribers-list">
+                            <!-- Subscriber rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Quote Requests Dashboard</h1>
+            <div class="admin-actions">
+                <button id="debugData" class="action-button view-button">
+                    <i class="fas fa-bug"></i> Debug Data
+                </button>
+                <button id="refreshData" class="action-button view-button">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+                <button id="clearData" class="action-button delete-button">Clear All Data</button>
+            </div>
+        </div>
+
+        <div id="debugInfo" style="display: none; margin-bottom: 1rem; padding: 1rem; background: #f0f0f0; border-radius: 0.5rem;">
+            <pre id="debugContent"></pre>
+        </div>
+
+        <div id="quotesList">
+            <!-- Quote requests will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Modal for viewing quote details -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Quote Request Details</h2>
+                <button class="close-button">&times;</button>
+            </div>
+            <div id="quoteDetails">
+                <!-- Quote details will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize database if it doesn't exist
+        console.log('Admin page starting...');
+        let initialData = localStorage.getItem('quoteRequests');
+        console.log('Initial localStorage data:', initialData);
+
+        if (!initialData) {
+            console.log('No data found, initializing empty array');
+            localStorage.setItem('quoteRequests', JSON.stringify([]));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Admin page DOM loaded');
+            
+            const quotesList = document.getElementById('quotesList');
+            const modal = document.getElementById('quoteModal');
+            const quoteDetails = document.getElementById('quoteDetails');
+            const closeButton = document.querySelector('.close-button');
+            const clearDataButton = document.getElementById('clearData');
+            const refreshDataButton = document.getElementById('refreshData');
+            const debugDataButton = document.getElementById('debugData');
+            const debugInfo = document.getElementById('debugInfo');
+            const debugContent = document.getElementById('debugContent');
+
+            // Debug button handler
+            debugDataButton.addEventListener('click', function() {
+                console.log('Debug button clicked');
+                try {
+                    const rawData = localStorage.getItem('quoteRequests');
+                    console.log('Raw localStorage data:', rawData);
+                    
+                    const debugText = `
+Raw localStorage data: ${rawData}
+
+Parsed data: ${JSON.stringify(JSON.parse(rawData || '[]'), null, 2)}
+
+localStorage keys: ${Object.keys(localStorage).join(', ')}
+                    `;
+                    
+                    debugContent.textContent = debugText;
+                    debugInfo.style.display = 'block';
+                } catch (error) {
+                    console.error('Error in debug:', error);
+                    debugContent.textContent = `Error: ${error.message}`;
+                    debugInfo.style.display = 'block';
+                }
+            });
+
+            // Function to format date
+            function formatDate(dateString) {
+                return new Date(dateString).toLocaleString();
+            }
+
+            // Function to display quotes
+            function displayQuotes() {
+                console.log('Displaying quotes...');
+                
+                try {
+                    const rawData = localStorage.getItem('quoteRequests');
+                    console.log('Raw data from localStorage:', rawData);
+                    
+                    let quotes = [];
+                    if (rawData) {
+                        quotes = JSON.parse(rawData);
+                        if (!Array.isArray(quotes)) {
+                            console.log('Data is not an array, resetting');
+                            quotes = [];
+                            localStorage.setItem('quoteRequests', JSON.stringify(quotes));
+                        }
+                    } else {
+                        console.log('No data found in localStorage');
+                        localStorage.setItem('quoteRequests', JSON.stringify(quotes));
+                    }
+
+                    console.log('Processed quotes:', quotes);
+
+                    if (quotes.length === 0) {
+                        console.log('No quotes to display');
+                        quotesList.innerHTML = '<div class="no-requests">No quote requests found</div>';
+                        return;
+                    }
+
+                    let html = `
+                        <table class="quote-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Company</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    quotes.forEach(quote => {
+                        console.log('Processing quote:', quote);
+                        html += `
+                            <tr>
+                                <td>${formatDate(quote.date)}</td>
+                                <td>${quote.name || 'N/A'}</td>
+                                <td>${quote.company || 'N/A'}</td>
+                                <td><span class="status-pill status-${quote.status.toLowerCase()}">${quote.status}</span></td>
+                                <td class="actions">
+                                    <button class="action-button view-button" onclick="showQuoteDetails(${quote.id})">View</button>
+                                    <button class="action-button delete-button" onclick="deleteQuote(${quote.id})">Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    html += '</tbody></table>';
+                    quotesList.innerHTML = html;
+                    console.log('Table rendered successfully');
+                } catch (error) {
+                    console.error('Error displaying quotes:', error);
+                    quotesList.innerHTML = `
+                        <div class="error-message">
+                            Error loading quote requests: ${error.message}<br>
+                            Please check the console for more details.
+                        </div>
+                    `;
+                }
+            }
+
+            // Function to show quote details
+            window.showQuoteDetails = function(id) {
+                console.log('Showing details for quote:', id);
+                try {
+                    const quotes = JSON.parse(localStorage.getItem('quoteRequests')) || [];
+                    const quote = quotes.find(q => q.id === id);
+
+                    if (quote) {
+                        const detailsHtml = `
+                            <div class="detail-row">
+                                <div class="detail-label">Date</div>
+                                <div>${formatDate(quote.date)}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Name</div>
+                                <div>${quote.name || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Email</div>
+                                <div>${quote.email || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Company</div>
+                                <div>${quote.company || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Phone</div>
+                                <div>${quote.phone || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Origin Port</div>
+                                <div>${quote.origin || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Destination Port</div>
+                                <div>${quote.destination || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Container Type</div>
+                                <div>${quote.containerType || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Cargo Type</div>
+                                <div>${quote.cargoType || 'N/A'}</div>
+                            </div>
+                            <div class="detail-row">
+                                <div class="detail-label">Message</div>
+                                <div>${quote.message || 'No message provided'}</div>
+                            </div>
+                        `;
+
+                        quoteDetails.innerHTML = detailsHtml;
+                        modal.classList.add('active');
+                        console.log('Quote details displayed');
+                    } else {
+                        console.error('Quote not found:', id);
+                    }
+                } catch (error) {
+                    console.error('Error showing quote details:', error);
+                }
+            };
+
+            // Function to delete quote
+            window.deleteQuote = function(id) {
+                console.log('Attempting to delete quote:', id);
+                if (confirm('Are you sure you want to delete this quote request?')) {
+                    try {
+                        const quotes = JSON.parse(localStorage.getItem('quoteRequests')) || [];
+                        const updatedQuotes = quotes.filter(q => q.id !== id);
+                        localStorage.setItem('quoteRequests', JSON.stringify(updatedQuotes));
+                        console.log('Quote deleted successfully');
+                        displayQuotes();
+                    } catch (error) {
+                        console.error('Error deleting quote:', error);
+                        alert('Error deleting quote. Please try again.');
+                    }
+                }
+            };
+
+            // Close modal when clicking close button or outside
+            closeButton.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+
+            // Clear all data
+            clearDataButton.addEventListener('click', () => {
+                if (confirm('Are you sure you want to delete all quote requests? This action cannot be undone.')) {
+                    try {
+                        localStorage.setItem('quoteRequests', JSON.stringify([]));
+                        console.log('All data cleared');
+                        displayQuotes();
+                    } catch (error) {
+                        console.error('Error clearing data:', error);
+                        alert('Error clearing data. Please try again.');
+                    }
+                }
+            });
+
+            // Refresh data
+            refreshDataButton.addEventListener('click', () => {
+                console.log('Refreshing data...');
+                displayQuotes();
+            });
+
+            // Initial display
+            displayQuotes();
+        });
+    </script>
+</body>
+</html> 
