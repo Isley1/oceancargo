@@ -150,6 +150,27 @@
     </style>
 </head>
 <body>
+    <script>
+        // Check authentication
+        if (!sessionStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <!-- Logout Button -->
+    <div style="position: fixed; top: 1rem; right: 1rem; z-index: 1000;">
+        <button onclick="logout()" class="action-button delete-button">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+
+    <script>
+        function logout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+
     <!-- Header/Navigation -->
     <header class="main-header">
         <div class="nav-container">
