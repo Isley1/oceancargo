@@ -2,18 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Admin Login | AVTRCONT</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>AC</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./style.css">
     <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
         .login-container {
+            width: 90%;
             max-width: 400px;
-            margin: 100px auto;
+            margin: 20px;
             padding: 2rem;
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
@@ -26,12 +43,14 @@
             font-size: 2rem;
             font-weight: bold;
             color: var(--primary);
+            margin-bottom: 1rem;
+            display: block;
         }
 
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .form-group {
@@ -43,38 +62,57 @@
         .form-group label {
             font-weight: 600;
             color: var(--gray-700);
+            font-size: 0.95rem;
         }
 
         .form-group input {
-            padding: 0.75rem;
-            border: 1px solid var(--gray-300);
-            border-radius: 4px;
+            padding: 0.875rem;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 8px;
             font-size: 1rem;
+            width: 100%;
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
         .login-button {
             background-color: var(--primary);
             color: white;
-            padding: 0.75rem;
+            padding: 1rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: 1rem;
         }
 
         .login-button:hover {
             background-color: var(--primary-dark);
         }
 
+        .login-button:active {
+            transform: translateY(1px);
+        }
+
         .error-message {
             color: #ef4444;
             background-color: #fee2e2;
-            padding: 0.75rem;
-            border-radius: 4px;
+            padding: 0.875rem;
+            border-radius: 8px;
             text-align: center;
             display: none;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
         .password-group {
@@ -88,8 +126,40 @@
             transform: translateY(-50%);
             background: none;
             border: none;
+            padding: 0.5rem;
             cursor: pointer;
             color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+            z-index: 1;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .login-header .logo-text {
+                font-size: 1.75rem;
+            }
+
+            .form-group input,
+            .login-button {
+                font-size: 16px; /* Prevents iOS zoom */
+            }
+        }
+
+        /* Fix for iOS input zoom */
+        @media screen and (-webkit-min-device-pixel-ratio: 0) { 
+            select,
+            textarea,
+            input {
+                font-size: 16px !important;
+            }
         }
     </style>
 </head>
@@ -105,14 +175,14 @@
         <form id="login-form" class="login-form">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" required autocomplete="username" autocapitalize="none">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="password-group">
-                    <input type="password" id="password" name="password" required>
-                    <button type="button" class="password-toggle" id="password-toggle">
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                    <button type="button" class="password-toggle" id="password-toggle" aria-label="Toggle password visibility">
                         <i class="far fa-eye"></i>
                     </button>
                 </div>
@@ -123,21 +193,33 @@
     </div>
 
     <script>
-        // Initialize secure authentication
         document.addEventListener('DOMContentLoaded', function() {
             const loginForm = document.getElementById('login-form');
             const errorMessage = document.getElementById('error-message');
             const passwordToggle = document.getElementById('password-toggle');
             const passwordInput = document.getElementById('password');
 
+            // Prevent double-tap zoom on iOS
+            document.addEventListener('touchstart', function(event) {
+                if (event.touches.length > 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+
+            // Prevent zoom on focus
+            document.addEventListener('gesturestart', function(event) {
+                event.preventDefault();
+            });
+
             // Toggle password visibility
-            passwordToggle.addEventListener('click', function() {
+            passwordToggle.addEventListener('click', function(e) {
+                e.preventDefault();
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
                 passwordToggle.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
             });
 
-            // Handle login form submission
+            // Handle form submission
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -145,18 +227,19 @@
                 const password = document.getElementById('password').value;
 
                 // For security, we'll use a hash of the password
-                // In production, this should be handled server-side
                 const hash = btoa(password); // This is just for demo, use proper hashing in production
 
-                // Check credentials (in production, this should be server-side)
                 if (username === 'admin' && hash === btoa('avtrcont2024')) {
-                    // Set session
                     sessionStorage.setItem('adminLoggedIn', 'true');
-                    // Redirect to admin dashboard
                     window.location.href = 'admin.html';
                 } else {
                     errorMessage.textContent = 'Invalid username or password';
                     errorMessage.style.display = 'block';
+                    
+                    // Hide error message after 3 seconds
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
                 }
             });
         });
